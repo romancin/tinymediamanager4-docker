@@ -34,9 +34,9 @@ pipeline {
         }
       }
     }
-    stage('Building image and pushing it to the registry (master)') {
+    stage('Building image and pushing it to the registry (main)') {
       when{
-        branch 'master'
+        branch 'main'
         }
       steps {
         script {
