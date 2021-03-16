@@ -1,6 +1,6 @@
 # tinymediamanager4-docker
 
-A repository for creating a docker container including TinyMediaManager v4 with GUI interface. This repository will add v4 tags to this docker image:
+A repository for creating a docker container including TinyMediaManager with GUI interface.
 
 https://hub.docker.com/r/romancin/tinymediamanager
 
@@ -38,6 +38,13 @@ romancin/tinymediamanager:v4-latest
 
 Browse to `http://your-host-ip:5800` to access the TinyMediaManager GUI.
 
+### Image TAGs available
+
+| TAG       | Description                                  |
+|-----------|----------------------------------------------|
+|`latest`| Latest available version of **TMM v3** |
+|`latest-v4`| Latest available version of **TMM v4** |
+|`vX.X.X` | Points directly to one of the TMM versions available, v3 or v4 |
 
 ### Environment Variables
 
@@ -285,3 +292,9 @@ Having troubles with the container or have questions?  Please
 ## Changelog
 
 v4.1.1 (16/03/2021): First version of TMM v4 (v4.1.1)
+
+v3.1.10 (31/10/2020): Updated TMM to 3.1.10
+
+v3.1.8 (09/09/2020): Updated to latest image from jlesage for Alpine 3.12, updated Corretto to current 1.8 version and TMM to 3.1.8
+
+v1.0.1 (22/09/2019): Updated to latest image from jlesage and added Jenkinsfile for CI

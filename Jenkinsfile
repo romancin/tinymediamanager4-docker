@@ -46,7 +46,7 @@ pipeline {
           def minor = versions[0] + '.' + versions[1]
           def patch = version.trim()
           docker.withRegistry('', registryCredential) {
-            def image = docker.build("$registry:v4-latest", "-f Dockerfile .")
+            def image = docker.build("$registry:latest-v4", "-f Dockerfile .")
             image.push()
             image.push(major)
             image.push(minor)
