@@ -1,6 +1,7 @@
 # tinymediamanager4-docker
 
-A repository for creating a docker container including TinyMediaManager v4 with GUI interface.
+A repository for creating a docker container including TinyMediaManager v4 with GUI interface. This repository will add v4 tags to this docker image:
+[![](https://hub.docker.com/r/romancin/tinymediamanager)
 
 [![](https://images.microbadger.com/badges/version/romancin/tinymediamanager.svg)](https://microbadger.com/images/romancin/tinymediamanager "Docker image version")
 [![](https://images.microbadger.com/badges/image/romancin/tinymediamanager.svg)](https://microbadger.com/images/romancin/tinymediamanager "Docker image size")
@@ -31,22 +32,11 @@ docker run -d --name=tinymediamanager \
 -e GROUP_ID=0 -e USER_ID=0 -e TZ=Europe/Madrid \
 -p 5800:5800 \
 -p 5900:5900 \
-romancin/tinymediamanager:latest
+romancin/tinymediamanager:v4-latest
 ```
 
 Browse to `http://your-host-ip:5800` to access the TinyMediaManager GUI.
 
-
-To run a container for this functionality, execute:
-
-```bash
-docker run --rm --name=tinymediamanagerscript \
--v /share/Container/tinymediamanager/config:/config \
--v /share/media:/media \
--e GROUP_ID=0 -e USER_ID=0 -e TZ=Europe/Madrid \
-romancin/tinymediamanager:develop /config/tinyMediaManagerCMD.sh -updateMovies -scrapeNew
-```
-Note --rm flag will delete it when finishes processing.
 
 ### Environment Variables
 
