@@ -6,7 +6,7 @@ A repository for creating a docker container including TinyMediaManager with GUI
 
 Latest versions:
 
-![Docker Image Version (latest semver)](https://img.shields.io/docker/v/romancin/tinymediamanager?sort=semver) ![docker size](https://img.shields.io/docker/image-size/romancin/tinymediamanager?sort=semver) 
+![Docker Image Version (latest semver)](https://img.shields.io/docker/v/romancin/tinymediamanager/v4) ![docker size](https://img.shields.io/docker/image-size/romancin/tinymediamanager/v4) 
 
 ![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/romancin/tinymediamanager/v3) ![docker size](https://img.shields.io/docker/image-size/romancin/tinymediamanager/v3) 
 
