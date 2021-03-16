@@ -1,4 +1,4 @@
-#tinymediamanager-docker
+# tinymediamanager-docker
 
 A repository for creating a docker container including TinyMediaManager with GUI interface.
 
