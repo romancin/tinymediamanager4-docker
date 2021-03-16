@@ -1,0 +1,13 @@
+tinymediamanager_service:
+    image: romancin/tinymediamanager4:latest
+    container_name: tinymediamanager4
+    ports:
+      - "5803:5800"
+    environment:
+      - USER_ID=0
+      - GROUP_ID=0
+      - TZ=Europe/Madrid
+      - VNC_PASSWORD=password
+    volumes:
+      - "/share/Container/tinymediamanager4:/config:rw"
+      - "/share/Container/tinymediamanager4/media:/media:rw"
