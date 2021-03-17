@@ -22,7 +22,8 @@ RUN \
     add-pkg \
         libmediainfo \
         ttf-dejavu \
-        bash
+        bash \
+	zenity
 
 # Fix Java Segmentation Fault
 RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
