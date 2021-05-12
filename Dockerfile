@@ -4,7 +4,7 @@
 FROM jlesage/baseimage-gui:alpine-3.12-glibc
 
 # Define software versions.
-ARG TMM_VERSION=4.1.3
+ARG TMM_VERSION=4.1.4
 
 # Define software download URLs.
 ARG TMM_URL=https://release.tinymediamanager.org/v4/dist/tmm_${TMM_VERSION}_linux.tar.gz
