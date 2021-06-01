@@ -13,7 +13,7 @@ mkdir -p /config/logs
 if [ ! -f /config/tmm.jar ]; then
     cp -r /defaults/* /config/
     cd /config
-    tar zxvf /config/tmm.tar.gz
+    tar zxvf --strip-components 1 /config/tmm.tar.gz
 fi
 
 # Take ownership of the config directory content.
