@@ -23,7 +23,7 @@ RUN \
         libmediainfo \
         ttf-dejavu \
         bash \
-	zenity \ &&
+	zenity && \
     apk --update add tar
 
 # Fix Java Segmentation Fault
