@@ -295,14 +295,3 @@ server {
 
 Having troubles with the container or have questions?  Please
 [create a new issue].
-
-## Changelog
-
-v4.1.1 (16/03/2021): First version of TMM v4 (v4.1.1)
-
-v3.1.10 (31/10/2020): Updated TMM to 3.1.10
-
-v3.1.8 (09/09/2020): Updated to latest image from jlesage for Alpine 3.12, updated Corretto to current 1.8 version and TMM to 3.1.8
-
-v1.0.1 (22/09/2019): Updated to latest image from jlesage and added Jenkinsfile for CI
-
