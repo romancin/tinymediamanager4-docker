@@ -1,10 +1,10 @@
 #
 # TinyMediaManager Dockerfile
 #
-FROM jlesage/baseimage-gui:alpine-3.12-glibc
+FROM jlesage/baseimage-gui:alpine-3.13-glibc
 
 # Define software versions.
-ARG TMM_VERSION=4.2.2
+ARG TMM_VERSION=4.2.5.1
 
 # Define software download URLs.
 ARG TMM_URL=https://release.tinymediamanager.org/v4/dist/tmm_${TMM_VERSION}_linux-amd64.tar.gz
@@ -23,16 +23,17 @@ RUN \
         libmediainfo \
         ttf-dejavu \
         bash \
+        zstd \
 	zenity && \
     apk --update add tar
 
 # Fix Java Segmentation Fault
-RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
+RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.zst \
     && mkdir -p /tmp/libz \
-    && tar -xf /tmp/libz.tar.xz -C /tmp/libz \
+    && tar -xf /tmp/libz.tar.zst -C /tmp/libz \
     && cp /tmp/libz/usr/lib/libz.so.1.2.11 /usr/glibc-compat/lib \
     && /usr/glibc-compat/sbin/ldconfig \
-    && rm -rf /tmp/libz /tmp/libz.tar.xz
+    && rm -rf /tmp/libz /tmp/libz.tar.zst
 
 # Maximize only the main/initial window.
 # It seems this is not needed for TMM 3.X version.
