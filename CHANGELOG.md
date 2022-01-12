@@ -1,8 +1,18 @@
 # Change Log
 All notable changes to this project will be documented in this file.
- 
+
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
+
+## [4.2.5.1] - 2022-01-12
+
+### Added
+
+### Changed
+- Upgraded TMM version to latest (v4.5.1).
+- Upgraded alpine version to 3.13 for base image.
+
+### Fixed
 
 ## [4.2.2] - 2021-10-01
 
