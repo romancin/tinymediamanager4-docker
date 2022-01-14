@@ -10,7 +10,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Upgraded TMM version to latest (v4.5.1).
-- Upgraded alpine version to 3.13 for base image.
 
 ### Fixed
 

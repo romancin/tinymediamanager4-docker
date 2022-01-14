@@ -1,7 +1,7 @@
 #
 # TinyMediaManager Dockerfile
 #
-FROM jlesage/baseimage-gui:alpine-3.13-glibc
+FROM jlesage/baseimage-gui:alpine-3.12-glibc
 
 # Define software versions.
 ARG TMM_VERSION=4.2.5.1
