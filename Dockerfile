@@ -25,7 +25,7 @@ RUN \
         bash \
 	zenity \
         tar \
-	zstd && \
+	zstd
 
 # Fix Java Segmentation Fault
 RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
