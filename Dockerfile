@@ -19,12 +19,13 @@ RUN \
 
 # Install dependencies.
 RUN \
-    add-pkg \
+    apk add --update \
         libmediainfo \
         ttf-dejavu \
         bash \
-	zenity && \
-    apk --update add tar
+	zenity \
+        tar \
+	zstd && \
 
 # Fix Java Segmentation Fault
 RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
