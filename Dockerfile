@@ -4,7 +4,7 @@
 FROM jlesage/baseimage-gui:alpine-3.12-glibc
 
 # Define software versions.
-ARG TMM_VERSION=4.2.2
+ARG TMM_VERSION=4.2.5.1
 
 # Define software download URLs.
 ARG TMM_URL=https://release.tinymediamanager.org/v4/dist/tmm_${TMM_VERSION}_linux-amd64.tar.gz
@@ -23,9 +23,10 @@ RUN \
         libmediainfo \
         ttf-dejavu \
         bash \
-	zenity \
+	      zenity \
         tar \
-	zstd && \
+      	zstd
+
 
 # Fix Java Segmentation Fault
 RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
