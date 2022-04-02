@@ -7,6 +7,11 @@ pipeline {
   }
   agent any
   stages {
+    stage('Prepare Jenkins worker') {
+      steps {
+                sh 'apt update && apt install -y docker.io'
+      }
+    }
     stage('Cloning Git Repository') {
       steps {
         git url: 'https://github.com/romancin/tinymediamanager4-docker.git',
@@ -26,7 +31,7 @@ pipeline {
           def minor = gitbranch + '-' + versions[0] + '.' + versions[1]
           def patch = gitbranch + '-' + version.trim()
           docker.withRegistry('', registryCredential) {
-	    def image = docker.build("$registry:$gitbranch-v4",  "-f Dockerfile .")
+	      def image = docker.build("$registry:$gitbranch-v4",  "--network=host -f Dockerfile .")
             image.push(major)
             image.push(minor)
             image.push(patch)
@@ -46,7 +51,7 @@ pipeline {
           def minor = versions[0] + '.' + versions[1]
           def patch = version.trim()
           docker.withRegistry('', registryCredential) {
-            def image = docker.build("$registry:latest-v4", "-f Dockerfile .")
+            def image = docker.build("$registry:latest-v4", "--network=host -f Dockerfile .")
             image.push()
             image.push(major)
             image.push(minor)
@@ -55,7 +60,7 @@ pipeline {
         }
         script {
           withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-          docker.image('sheogorath/readme-to-dockerhub').run('-v $PWD:/data -e DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME -e DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD -e DOCKERHUB_REPO_NAME=$repository')
+          docker.image('sheogorath/readme-to-dockerhub').run('--network=host -v $PWD:/data -e DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME -e DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD -e DOCKERHUB_REPO_NAME=$repository')
           }
         }
       }
