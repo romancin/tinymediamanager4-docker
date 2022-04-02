@@ -24,9 +24,10 @@ RUN \
         libmediainfo \
         ttf-dejavu \
         bash \
-	      zenity \
+	    zenity \
         tar \
-      	zstd
+      	zstd \
+        zlib
 
 
 # Fix Java Segmentation Fault
