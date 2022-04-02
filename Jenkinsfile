@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Prepare Jenkins worker') {
       steps {
-                sh 'apt update && apt install -y docker-io'
+                sh 'apt update && apt install -y docker.io'
       }
     }
     stage('Cloning Git Repository') {
