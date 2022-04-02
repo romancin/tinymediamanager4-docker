@@ -31,7 +31,7 @@ pipeline {
           def minor = gitbranch + '-' + versions[0] + '.' + versions[1]
           def patch = gitbranch + '-' + version.trim()
           docker.withRegistry('', registryCredential) {
-	    def image = docker.build("$registry:$gitbranch-v4",  "-f Dockerfile .")
+	      def image = docker.build("--network=host", "$registry:$gitbranch-v4",  "-f Dockerfile .")
             image.push(major)
             image.push(minor)
             image.push(patch)

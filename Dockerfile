@@ -9,24 +9,25 @@ ARG TMM_VERSION=4.2.7
 # Define software download URLs.
 ARG TMM_URL=https://release.tinymediamanager.org/v4/dist/tmm_${TMM_VERSION}_linux-amd64.tar.gz
 ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/jre/bin
+
 # Define working directory.
 WORKDIR /tmp
-
-# Install dependencies.
-RUN \
-    apk add --update \
-        curl \
-        libmediainfo \
-        ttf-dejavu \
-        bash \
-	    zenity \
-        tar \
-      	zstd
 
 # Download TinyMediaManager
 RUN \
     mkdir -p /defaults && \
-    curl -o /defaults/tmm.tar.gz ${TMM_URL}
+    wget ${TMM_URL} -O /defaults/tmm.tar.gz
+
+# Install dependencies.
+RUN \
+    apk add --update \
+        libmediainfo \
+        ttf-dejavu \
+        bash \
+	      zenity \
+        tar \
+      	zstd
+
 
 # Fix Java Segmentation Fault
 RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
