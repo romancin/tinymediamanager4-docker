@@ -7,6 +7,11 @@ pipeline {
   }
   agent any
   stages {
+    stage('Prepare Jenkins worker') {
+      steps {
+                sh 'apt update && apt install -y docker-io'
+      }
+    }
     stage('Cloning Git Repository') {
       steps {
         git url: 'https://github.com/romancin/tinymediamanager4-docker.git',
