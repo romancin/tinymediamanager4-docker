@@ -12,21 +12,21 @@ ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/jre/b
 # Define working directory.
 WORKDIR /tmp
 
+# Install dependencies.
+RUN \
+    apk add --update \
+        curl \
+        libmediainfo \
+        ttf-dejavu \
+        bash \
+	    zenity \
+        tar \
+      	zstd
+
 # Download TinyMediaManager
 RUN \
     mkdir -p /defaults && \
     curl -o /defaults/tmm.tar.gz ${TMM_URL}
-
-# Install dependencies.
-RUN \
-    apk add --update \
-        libmediainfo \
-        ttf-dejavu \
-        bash \
-	      zenity \
-        tar \
-      	zstd
-
 
 # Fix Java Segmentation Fault
 RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
