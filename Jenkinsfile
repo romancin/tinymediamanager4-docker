@@ -20,6 +20,11 @@ pipeline {
           - sleep
           args:
           - 9999999
+          env:
+          - name: HTTP_PROXY
+            value: null
+          - name: HTTPS_PROXY
+            value: null
       """
      }
   }
