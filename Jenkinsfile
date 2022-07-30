@@ -14,7 +14,7 @@ pipeline {
         spec:
         containers:
         - name: kaniko
-          image: gcr.io/kaniko-project/executor:debug-539ddefcae3fd6b411a95982a830d987f4214251
+          image: gcr.io/kaniko-project/executor
           imagePullPolicy: Always
           command:
           - sleep
@@ -42,8 +42,8 @@ pipeline {
           def major = gitbranch + '-' + versions[0]
           def minor = gitbranch + '-' + versions[0] + '.' + versions[1]
           def patch = gitbranch + '-' + version.trim()
+          sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --cache=true --destination=$registry:$gitbranch-v4'
         }
-        sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --cache=true --destination=$registry:$gitbranch-v4'
       }
     }
     stage('Building image and pushing it to the registry (main)') {
