@@ -5,7 +5,23 @@ pipeline {
     withCredentials = 'dockerhub'
     registryCredential = 'dockerhub'
   }
-  agent any
+  agent {
+    kubernetes {
+      //cloud 'kubernetes'
+      defaultContainer 'kaniko'
+      yaml """
+        kind: Pod
+        spec:
+        containers:
+        - name: kaniko
+          image: gcr.io/kaniko-project/executor:debug-539ddefcae3fd6b411a95982a830d987f4214251
+          imagePullPolicy: Always
+          command:
+          - sleep
+          args:
+          - 9999999
+      """
+  }
   stages {
     stage('Cloning Git Repository') {
       steps {
@@ -25,13 +41,8 @@ pipeline {
           def major = gitbranch + '-' + versions[0]
           def minor = gitbranch + '-' + versions[0] + '.' + versions[1]
           def patch = gitbranch + '-' + version.trim()
-          docker.withRegistry('', registryCredential) {
-	      def image = docker.build("$registry:$gitbranch-v4",  "--network=host -f Dockerfile .")
-            image.push(major)
-            image.push(minor)
-            image.push(patch)
-            }
         }
+        sh '/kaniko/executor -f `pwd`/Dockerfile -c `pwd` --cache=true --destination=$registry:$gitbranch-v4'
       }
     }
     stage('Building image and pushing it to the registry (main)') {
