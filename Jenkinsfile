@@ -7,7 +7,8 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
   ],
   volumes: [
     secretVolume(secretName: 'docker-config', mountPath: '/root/.docker')
-  ]) {
+  ])
+  pipeline {
     node('github-docker-builder') {
         stage('Cloning Git Repository') {
           steps {
