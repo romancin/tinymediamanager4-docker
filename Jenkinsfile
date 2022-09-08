@@ -1,4 +1,5 @@
 registry="romancin/tinymediamanager"
+pipeline {
 
 podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
   containers: [
@@ -77,4 +78,5 @@ properties([[
         success {
             telegramSend(message: '[Jenkins] - Pipeline CI-tinymediamanager-docker $BUILD_URL finalizado con estado :: $BUILD_STATUS', chatId: -395961814) }
   }
+}
 }
