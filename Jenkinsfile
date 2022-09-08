@@ -1,5 +1,4 @@
 registry="romancin/tinymediamanager"
-pipeline {
 
 podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
   containers: [
