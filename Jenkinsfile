@@ -1,6 +1,6 @@
 registry="romancin/tinymediamanager"
 
-podTemplate(label: 'github-docker-builder', cloud: 'kubernetes', serviceAccount: 'jenkins',
+podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
   containers: [
     containerTemplate(name: 'buildkit', image: 'moby/buildkit:master', ttyEnabled: true, privileged: true),
   ],
