@@ -15,9 +15,7 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
             }
         }
         stage('Building image and pushing it to the registry (develop)') {
-          when{
-            branch 'develop'
-          }
+          if (env.BRANCH_NAME == 'develop') {
             container('buildkit') {
                 script {
                   def gitbranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
@@ -34,11 +32,10 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
                      buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=${registry}:${patch},push=true
                    """
             }
+          }
         }
         stage('Building image and pushing it to the registry (main)') {
-          when{
-            branch 'main'
-          }
+          if (env.BRANCH_NAME == 'main') {
             container('buildkit') {
                 script {
                   def gitbranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
@@ -55,6 +52,7 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
                      buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=${registry}:${patch},push=true
                    """
             }
+          }
         }
        }
 }
