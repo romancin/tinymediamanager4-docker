@@ -16,15 +16,13 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
         }
         stage('Building image and pushing it to the registry (develop)') {
           if (env.BRANCH_NAME == 'feature/ci-k8s') {
+            def gitbranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
+            def version = readFile('VERSION')
+            def versions = version.split('\\.')
+            def major = gitbranch + '-' + versions[0]
+            def minor = gitbranch + '-' + versions[0] + '.' + versions[1]
+            def patch = gitbranch + '-' + version.trim()
             container('buildkit') {
-                script {
-                  def gitbranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
-                  def version = readFile('VERSION')
-                  def versions = version.split('\\.')
-                  def major = gitbranch + '-' + versions[0]
-                  def minor = gitbranch + '-' + versions[0] + '.' + versions[1]
-                  def patch = gitbranch + '-' + version.trim()
-                }
                 sh """
                      buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=${registry}:${gitbranch}-v4,push=true
                      buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=${registry}:${major},push=true
