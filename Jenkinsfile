@@ -15,7 +15,7 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
             }
         }
         stage('Building image and pushing it to the registry (develop)') {
-          if (env.BRANCH_NAME == 'develop') {
+          if (env.BRANCH_NAME == 'feature/ci-k8s') {
             container('buildkit') {
                 script {
                   def gitbranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
