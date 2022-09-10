@@ -34,13 +34,12 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
              container('docker-readme') {
                withEnv(['DOCKERHUB_REPO_NAME=tinymediamanager']) {
                  withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                      sh '''
-                      export DOCKERHUB_REPO_NAME=$registry
-                      export DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME
-                      export DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD
+                      sh """
+                      export DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME}
+                      export DOCKERHUB_PASSWORD=${DOCKERHUB_PASSWORD}
                       rm -rf /data && ln -s `pwd` /data
                       cd /data && node --unhandled-rejections=strict /app/index.js
-                      '''
+                      """
                  }
                }
              }
