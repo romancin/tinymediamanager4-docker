@@ -7,8 +7,7 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
   volumes: [
     secretVolume(secretName: 'docker-config', mountPath: '/root/.docker')
   ])
-  pipeline {
-    node('github-docker-builder') {
+   {
         stage('Cloning Git Repository') {
           steps {
             container('buildkit') {
@@ -78,4 +77,3 @@ properties([[
         success {
             telegramSend(message: '[Jenkins] - Pipeline CI-tinymediamanager-docker $BUILD_URL finalizado con estado :: $BUILD_STATUS', chatId: -395961814) }
   }
-}
