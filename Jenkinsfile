@@ -62,7 +62,7 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
                     """
              }
              container('docker-readme') {
-               withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+               withCredentials([string(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                     sh '''
                     export DOCKERHUB_REPO_NAME=${registry}
                     export DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME
@@ -74,6 +74,11 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
              }
            }
          }
+        stage('Notify Build Result') {
+          withCredentials([usernamePassword(credentialsId: 'discord-webhook-notificaciones', variable: 'DISCORD_WEBHOOK')]) {
+            discordSend description: "[Jenkins] - Pipeline CI-docker-tinymediamanager4", footer: "", link: env.BUILD_URL, result: currentBuild.currentResult, title: JOB_NAME, webhookURL: "${DISCORD_WEBHOOK}"
+          }
+        }
        }
 }
 
