@@ -9,18 +9,15 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
   ]) {
        node('github-docker-builder') {
         stage('Cloning Git Repository') {
-          steps {
             container('buildkit') {
               git url: 'https://github.com/romancin/tinymediamanager4-docker.git',
               branch: '$BRANCH_NAME'
             }
-          }
         }
         stage('Building image and pushing it to the registry (develop)') {
           when{
             branch 'develop'
           }
-          steps {
             container('buildkit') {
                 script {
                   def gitbranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
@@ -37,13 +34,11 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
                      buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=${registry}:${patch},push=true
                    """
             }
-          }
         }
         stage('Building image and pushing it to the registry (main)') {
           when{
             branch 'main'
           }
-          steps {
             container('buildkit') {
                 script {
                   def gitbranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
@@ -60,7 +55,6 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
                      buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=${registry}:${patch},push=true
                    """
             }
-          }
         }
        }
 }
