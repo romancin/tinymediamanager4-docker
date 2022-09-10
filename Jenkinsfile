@@ -34,8 +34,7 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
         }
         stage('Building image and pushing it to the registry (main)') {
           if (env.BRANCH_NAME == 'main') {
-            container('buildkit') {
-                script {
+            script {
                   def gitbranch = sh(returnStdout: true, script: 'git rev-parse --abbrev-ref HEAD').trim()
                   def version = readFile('VERSION')
                   def versions = version.split('\\.')
@@ -43,6 +42,7 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
                   def minor = gitbranch + '-' + versions[0] + '.' + versions[1]
                   def patch = gitbranch + '-' + version.trim()
                 }
+            container('buildkit') {
                 sh """
                      buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=${registry}:latest-v4,push=true
                      buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=${registry}:${major},push=true
