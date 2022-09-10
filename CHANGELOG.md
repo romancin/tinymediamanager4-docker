@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [4.3.3] - 2022-09-10
+
+### Added
+
+### Changed
+- Upgraded TMM version to latest (v4.3.3).
+
+### Fixed
+- Changed Jenkins pipeline to be executed on new Jenkins running on kubernetes.
+
 ## [4.2.8] - 2022-05-11
 
 ### Added
