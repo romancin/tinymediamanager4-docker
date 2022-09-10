@@ -6,26 +6,26 @@ A repository for creating a docker container including TinyMediaManager with GUI
 
 Latest versions:
 
-![Docker Image Version (latest semver)](https://img.shields.io/docker/v/romancin/tinymediamanager/v4) ![docker size](https://img.shields.io/docker/image-size/romancin/tinymediamanager/v4) 
+![Docker Image Version (latest semver)](https://img.shields.io/docker/v/romancin/tinymediamanager/v4) ![docker size](https://img.shields.io/docker/image-size/romancin/tinymediamanager/v4)
 
-![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/romancin/tinymediamanager/v3) ![docker size](https://img.shields.io/docker/image-size/romancin/tinymediamanager/v3) 
+![Docker Image Version (tag latest semver)](https://img.shields.io/docker/v/romancin/tinymediamanager/v3) ![docker size](https://img.shields.io/docker/image-size/romancin/tinymediamanager/v3)
 
 
 If you are migrating from v3 to v4, please make a backup before. I recommend you create a new host directory to map the new config, and copy the "/config/data" folder from v3 version to it.
 Take a look at the official upgrade documentation here:
 https://www.tinymediamanager.org/docs/upgrade-v4
 
-You can invite me a beer if you want ;) 
+You can invite me a beer if you want ;)
 
 This is a completely funcional Docker image with TinyMediaManager.
 
-Based on Alpine Linux, which provides a very small size. 
+Based on Alpine Linux, which provides a very small size.
 
 Tested and working on Synology and QNAP, but should work on any x86_64 devices.
 
 Thanks to @jlesage for a great base image for GUI apps.
 
-Instructions: 
+Instructions:
 - Map any local port to 5800 for web access
 - Map any local port to 5900 for VNC access
 - Map a local volume to /config (Stores configuration data)
@@ -294,4 +294,4 @@ server {
 ## Support or Contact
 
 Having troubles with the container or have questions?  Please
-[create a new issue].
+[create a new issue]!(https://github.com/romancin/tinymediamanager4-docker/issues/new).
