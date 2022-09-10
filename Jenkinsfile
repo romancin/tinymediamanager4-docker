@@ -31,18 +31,6 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
                       buildctl build --frontend dockerfile.v0 --local context=. --local dockerfile=. --output type=image,name=${registry}:${patch},push=true
                     """
              }
-             container('docker-readme') {
-               withEnv(['DOCKERHUB_REPO_NAME=tinymediamanager']) {
-                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                      sh """
-                      export DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME}
-                      export DOCKERHUB_PASSWORD=${DOCKERHUB_PASSWORD}
-                      rm -rf /data && ln -s `pwd` /data
-                      cd /data && node --unhandled-rejections=strict /app/index.js
-                      """
-                 }
-               }
-             }
            }
          }
          stage('Building image and pushing it to the registry (main)') {
@@ -62,14 +50,15 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
                     """
              }
              container('docker-readme') {
-               withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
-                    sh '''
-                    export DOCKERHUB_REPO_NAME=${registry}
-                    export DOCKERHUB_USERNAME=$DOCKERHUB_USERNAME
-                    export DOCKERHUB_PASSWORD=$DOCKERHUB_PASSWORD
-                    rm -rf /data && ln -s `pwd` /data
-                    cd /data && node --unhandled-rejections=strict /app/index.js
-                    '''
+               withEnv(['DOCKERHUB_REPO_NAME=tinymediamanager']) {
+                 withCredentials([usernamePassword(credentialsId: 'dockerhub', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                      sh """
+                      export DOCKERHUB_USERNAME=${DOCKERHUB_USERNAME}
+                      export DOCKERHUB_PASSWORD=${DOCKERHUB_PASSWORD}
+                      rm -rf /data && ln -s `pwd` /data
+                      cd /data && node --unhandled-rejections=strict /app/index.js
+                      """
+                 }
                }
              }
            }
