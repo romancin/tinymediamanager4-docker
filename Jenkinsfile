@@ -9,10 +9,10 @@ podTemplate(label: 'github-docker-builder', cloud: 'kubernetes',
   ]) {
        node('github-docker-builder') {
          stage('Cloning Git Repository') {
-             container('buildkit') {
-               git url: 'https://github.com/romancin/tinymediamanager4-docker.git',
-               branch: '$BRANCH_NAME'
-             }
+           container('buildkit') {
+             git url: 'https://github.com/romancin/tinymediamanager4-docker.git',
+             branch: '$BRANCH_NAME'
+           }
          }
          stage('Building image and pushing it to the registry (develop)') {
            if (env.BRANCH_NAME == 'develop') {
