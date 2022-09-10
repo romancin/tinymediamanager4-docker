@@ -294,4 +294,4 @@ server {
 ## Support or Contact
 
 Having troubles with the container or have questions?  Please
-[create a new issue]!(https://github.com/romancin/tinymediamanager4-docker/issues/new).
+[create a new issue](https://github.com/romancin/tinymediamanager4-docker/issues/new).
