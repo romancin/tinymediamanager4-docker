@@ -4,7 +4,8 @@
 FROM jlesage/baseimage-gui:alpine-3.12-glibc
 
 # Define software versions.
-ARG TMM_VERSION=4.3.8.1
+
+ARG TMM_VERSION=4.3.13
 
 # Define software download URLs.
 ARG TMM_URL=https://release.tinymediamanager.org/v4/dist/tmm_${TMM_VERSION}_linux-amd64.tar.gz
@@ -33,7 +34,7 @@ RUN \
 RUN wget "https://www.archlinux.org/packages/core/x86_64/zlib/download" -O /tmp/libz.tar.xz \
     && mkdir -p /tmp/libz \
     && tar -xf /tmp/libz.tar.xz -C /tmp/libz \
-    && cp /tmp/libz/usr/lib/libz.so.1.2.13 /usr/glibc-compat/lib \
+    && cp /tmp/libz/usr/lib/libz.so.1.3 /usr/glibc-compat/lib \
     && /usr/glibc-compat/sbin/ldconfig \
     && rm -rf /tmp/libz /tmp/libz.tar.xz
 
